@@ -1,11 +1,29 @@
 <template>
   <div class="wrapper">
-    <h1>Start vue</h1>
+    <TheHeader />
+    <TheBreadcrumbs />
     <router-view />
   </div>
 </template>
 
-<style lang="scss" scoped>
+<script>
+import TheHeader from "@/components/TheHeader.vue";
+import TheBreadcrumbs from "@/components/TheBreadcrumbs.vue";
+
+export default {
+  name: "App",
+  components: {
+    TheHeader,
+    TheBreadcrumbs,
+  },
+  mounted() {
+    this.$store.dispatch("favorites/getFavoritesIdListFromStorage");
+    this.$store.dispatch("cart/fetchByCartIdList");
+  },
+};
+</script>
+
+<style lang="scss">
 .wrapper {
   max-width: 1920px;
   width: 100%;
