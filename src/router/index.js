@@ -1,19 +1,39 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../views/Home.vue';
+import CategoryPage from '@/views/category/CategoryPage.vue';
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    redirect: '/products',
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    path: '/products',
+    name: 'CategoryPage',
+    component: CategoryPage,
+  },
+  {
+    path: '/products/:id',
+    name: 'ProductPage',
+    props: true,
+    component: () =>
+      import(/* webpackChunkName: "singleProduct" */ '../views/product/ProductPage.vue'),
+  },
+  {
+    path: '/cart',
+    name: 'CartPage',
+    component: () => import(/* webpackChunkName: "cart" */ '../views/cart/CartPage.vue'),
+  },
+  {
+    path: '/favorites',
+    name: 'FavoritesPage',
+    component: () =>
+      import(/* webpackChunkName: "favorites" */ '../views/favorites/FavoritesPage.vue'),
+  },
+
+  {
+    path: '/:pathMatch(.*)*',
+    component: () =>
+      import(/* webpackChunkName: "notfound" */ '../views/not-found/NotFoundPage.vue'),
   },
 ];
 

@@ -1,9 +1,32 @@
 <template>
   <div class="wrapper">
-    <h1>Start vue</h1>
+    <TheHeader />
+    <TheBreadcrumbs />
+
     <router-view />
   </div>
 </template>
+
+<script>
+import { onMounted } from 'vue';
+import TheHeader from '@/components/TheHeader.vue'
+import TheBreadcrumbs from '@/components/TheBreadcrumbs.vue';
+import { useCart } from '@/hooks/useCart.js'
+
+export default {
+  components: {
+    TheHeader,
+    TheBreadcrumbs
+  },
+  setup() {
+    const { fetchByCartIdList } = useCart();
+    
+    onMounted(() => {
+      fetchByCartIdList();
+    })
+  },
+}
+</script>
 
 <style lang="scss" scoped>
 .wrapper {
