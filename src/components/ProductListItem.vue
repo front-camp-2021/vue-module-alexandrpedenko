@@ -17,7 +17,10 @@
       <span class="product__price">${{ product.price }}</span>
     </div>
     <div class="product__info">
-      <h3 class="product__name">
+      <h3
+        v-ellipsis
+        class="product__name"
+      >
         <router-link
           class="product__name-link"
           :to="{ path: `/products/${product.id}` }"
